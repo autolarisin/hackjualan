@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AUTO LARISIN - AI Sales Booster Pro</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 0, 128, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(255, 255, 0, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(20,20,20,0.9) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 60px 40px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff0080, #ff8c00, #40e0d0, #ff0080);
+            background-size: 200% 100%;
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .header h1 {
+            font-size: 4em;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff 0%, #ff0080 50%, #40e0d0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+        }
+
+        .header .subtitle {
+            font-size: 1.3em;
+            color: rgba(255,255,255,0.7);
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .header .badge {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 8px 20px;
+            background: rgba(255,0,128,0.2);
+            border: 1px solid rgba(255,0,128,0.4);
+            border-radius: 50px;
+            color: #ff0080;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: rgba(20,20,20,0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255,255,255,0.2);
+            box-shadow: 0 15px 50px rgba(255,0,128,0.2);
+        }
+
+        .card-title {
+            font-size: 1.2em;
+            color: #fff;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card-title .icon {
+            font-size: 1.4em;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: rgba(255,255,255,0.9);
+            font-size: 0.95em;
+            letter-spacing: 0.5px;
+        }
+
+        select, textarea, input[type="text"] {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1em;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        select:focus, textarea:focus, input[type="text"]:focus {
+            outline: none;
+            border-color: #ff0080;
+            background: rgba(0,0,0,0.7);
+            box-shadow: 0 0 0 3px rgba(255,0,128,0.1);
+        }
+
+        select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 20px;
+            padding-right: 50px;
+        }
+
+        select option {
+            background: #1a1a1a;
+            color: #fff;
+            padding: 10px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: rgba(255,255,255,0.3);
+        }
+
+        .btn-generate {
+            width: 100%;
+            padding: 22px;
+            background: linear-gradient(135deg, #ff0080 0%, #ff8c00 100%);
+            color: #fff;
+            border: none;
+            border-radius: 16px;
+            font-size: 1.3em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 10px 30px rgba(255,0,128,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-generate::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-generate:hover::before {
+            left: 100%;
+        }
+
+        .btn-generate:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255,0,128,0.5);
+        }
+
+        .btn-generate:active {
+            transform: translateY(0);
+        }
+
+        .btn-generate:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .output-section {
+            display: none;
+        }
+
+        .output-section.active {
+            display: block;
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .output-box {
+            background: rgba(255,255,255,0.98);
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 16px;
+            padding: 35px;
+            min-height: 300px;
+            max-height: 700px;
+            overflow-y: auto;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .output-box::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .output-box::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.05);
+            border-radius: 10px;
+        }
+
+        .output-box::-webkit-scrollbar-thumb {
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+        }
+
+        .output-box::-webkit-scrollbar-thumb:hover {
+            background: rgba(0,0,0,0.3);
+        }
+
+        .output-box pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: 'Inter', sans-serif;
+            font-size: 1em;
+            line-height: 1.8;
+            color: #1a1a1a;
+        }
+
+        .output-box h1 {
+            color: #000;
+            margin: 30px 0 15px 0;
+            font-weight: 900;
+            font-size: 2em;
+            border-bottom: 4px solid #ff0080;
+            padding-bottom: 12px;
+            letter-spacing: -1px;
+        }
+
+        .output-box h2 {
+            color: #1a1a1a;
+            margin: 25px 0 12px 0;
+            font-weight: 700;
+            font-size: 1.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .output-box h3 {
+            color: #2a2a2a;
+            margin: 20px 0 10px 0;
+            font-weight: 600;
+            font-size: 1.2em;
+        }
+
+        .output-box ul, .output-box ol {
+            margin-left: 30px;
+            margin-top: 12px;
+            margin-bottom: 20px;
+        }
+
+        .output-box li {
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+
+        .output-box strong {
+            color: #000;
+            font-weight: 700;
+        }
+
+        .output-box p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: #ff0080;
+            font-weight: 700;
+            font-size: 1.3em;
+        }
+
+        .loading::after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        .error {
+            background: rgba(255,50,50,0.1);
+            border: 2px solid rgba(255,50,50,0.3);
+            color: #ff5555;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+
+        .module-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            background: rgba(255,0,128,0.15);
+            border-radius: 6px;
+            font-size: 0.75em;
+            color: #ff0080;
+            font-weight: 700;
+            margin-left: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .secret-badge {
+            background: rgba(255,215,0,0.2);
+            color: #ffd700;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        @media (max-width: 1024px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2.5em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 40px 25px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚡ AUTO LARISIN</h1>
+            <p class="subtitle">AI-POWERED SALES BOOSTER</p>
+            <div class="badge">✨ 13 MODUL PREMIUM + FRAMEWORK RAHASIA</div>
+        </div>
+        
+        <div class="main-grid">
+            <div class="card">
+                <div class="card-title">
+                    <span class="icon">🎯</span>
+                    <span>Pilih Modul Power</span>
+                </div>
+                <div class="form-group">
+                    <label for="moduleSelect">Modul Generator:</label>
+                    <select id="moduleSelect">
+                        <option value="">-- Pilih Modul Rahasia --</option>
+                        <optgroup label="🔥 CORE MODULES">
+                            <option value="launch_blueprint">Launch Blueprint - Peluncuran 7 Hari</option>
+                            <option value="copy_studio">Copy Studio - Generator Copywriting</option>
+                            <option value="reseller_playbook">Reseller Playbook - Panduan Reseller</option>
+                            <option value="funnel_builder">Funnel Builder - Pembuat Funnel</option>
+                            <option value="wa_engine">WA Engine - Alur Chat WhatsApp</option>
+                            <option value="ad_matrix">Ad Matrix - Generator Iklan</option>
+                        </optgroup>
+                        <optgroup label="⚡ ADVANCED MODULES">
+                            <option value="secrets_vault">Secrets Vault - Growth Hacks Rahasia</option>
+                            <option value="kpi_spec">KPI Spec - Tracking & Metrics</option>
+                            <option value="code_exporter">Code Exporter - Export Kode</option>
+                            <option value="onboarding_sop">Onboarding SOP - SOP Operasional</option>
+                        </optgroup>
+                        <optgroup label="💎 SECRET WEAPONS">
+                            <option value="viral_hook_generator">Viral Hook Generator - Bikin Konten Viral</option>
+                            <option value="scarcity_machine">Scarcity Machine - Sistem Kelangkaan</option>
+                            <option value="objection_crusher">Objection Crusher - Hancurkan Penolakan</option>
+                        </optgroup>
+                    </select>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">
+                    <span class="icon">📊</span>
+                    <span>Data Produk Anda</span>
+                </div>
+                <div class="form-group">
+                    <label for="inputProduk">Nama Produk/Layanan:</label>
+                    <input type="text" id="inputProduk" placeholder="Contoh: Kursus Digital Marketing Pro">
+                </div>
+
+                <div class="form-group">
+                    <label for="inputHarga">Harga:</label>
+                    <input type="text" id="inputHarga" placeholder="Contoh: Rp 997.000">
+                </div>
+
+                <div class="form-group">
+                    <label for="inputTarget">Target Audience:</label>
+                    <input type="text" id="inputTarget" placeholder="Contoh: Pemilik UMKM, Freelancer, Content Creator">
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="form-group">
+                <label for="inputBenefit">Benefit/Manfaat Utama:</label>
+                <textarea id="inputBenefit" rows="3" placeholder="Contoh: Meningkatkan penjualan online 3x lipat dalam 30 hari dengan strategi terbukti"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="inputDurasi">Durasi/Timeline (opsional):</label>
+                <input type="text" id="inputDurasi" placeholder="Contoh: 30 hari, 3 bulan, lifetime access">
+            </div>
+
+            <div class="form-group">
+                <label for="inputTambahan">Info Tambahan (opsional):</label>
+                <textarea id="inputTambahan" rows="3" placeholder="Contoh: Include mentoring 1-on-1, garansi uang kembali 30 hari, bonus 10 template siap pakai"></textarea>
+            </div>
+
+            <button class="btn-generate" id="generateBtn">
+                🚀 GENERATE SEKARANG
+            </button>
+        </div>
+
+        <div class="output-section" id="outputSection">
+            <div class="card">
+                <div class="card-title">
+                    <span class="icon">✨</span>
+                    <span>Output Results</span>
+                </div>
+                <div class="output-box" id="outputBox"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const modulePrompts = {
+            launch_blueprint: (input) => `Gunakan input berikut: ${input}
+
+Buat Launch Blueprint 7 Hari yang lengkap dan detail dengan strategi proven:
+
+1. STRATEGI RINGKAS
+   - Overview strategi peluncuran
+   - Target dan goal utama
+   - Unique selling proposition
+   - Psychology triggers yang digunakan
+
+2. KONTEN HARIAN (7 HARI)
+   Hari 1-7, masing-masing berisi:
+   - Tema hari dengan hooks menarik
+   - Jenis konten (video/carousel/story)
+   - Platform distribusi optimal
+   - Waktu posting terbaik
+   - Engagement strategy
+
+3. SKRIP WA HARIAN
+   Hari 1-7, masing-masing berisi:
+   - Template pesan WhatsApp yang natural
+   - Tone dan gaya bahasa
+   - Timing pengiriman optimal
+   - Follow-up strategy
+
+4. CTA HARIAN
+   Hari 1-7, masing-masing berisi:
+   - Call to action spesifik dan kuat
+   - Urgency element yang powerful
+   - Link/kontak
+   - Bonus/incentive
+
+5. CHECKLIST LENGKAP
+   - Pre-launch preparation
+   - Daily execution checklist
+   - Post-launch follow-up
+   - Troubleshooting guide
+
+Format output dalam struktur yang jelas, actionable, dan mudah diikuti.`,
+
+            copy_studio: (input) => `Gunakan input berikut: ${input}
+
+Buat copywriting KILLER dengan conversion tinggi:
+
+1. 5 HEADLINE SUPER MENARIK
+   Buat 5 variasi headline yang irresistible:
+   - Curiosity-driven headline
+   - Benefit-focused headline
+   - Fear/Pain-driven headline
+   - Urgency headline
+   - Social proof headline
+   (Masing-masing maksimal 12 kata, powerful, dan compelling)
+
+2. 3 CAPTION MEDIA SOSIAL VIRAL
+   Caption untuk IG/FB/TikTok (200-250 kata):
+   - Opening hook yang grab attention
+   - Story/problem relatable
+   - Solution yang menarik
+   - CTA yang jelas
+   - Emoji strategy
+   - Hashtag strategy (10-15 hashtag)
+
+3. 3 SKRIP WHATSAPP CONVERSION TINGGI
+   - Pembuka yang natural dan friendly
+   - Body yang engaging dan persuasive
+   - Closing dengan CTA super jelas
+   - Follow-up message
+   (Tone: casual tapi professional)
+
+4. 1 HOOK VIDEO VIRAL (3-5 detik)
+   - Pattern interrupt yang kuat
+   - Curiosity gap yang bikin penasaran
+   - Maksimal 25 kata
+   - Visual suggestion
+
+5. 1 DESKRIPSI PRODUK LENGKAP
+   - Benefit-focused (bukan feature)
+   - Social proof elements
+   - Urgency triggers
+   - Guarantee/risk reversal
+   - Final CTA
+
+Gunakan bahasa yang conversational, persuasif, dan high-converting!`,
+
+            reseller_playbook: (input) => `Gunakan input berikut: ${input}
+
+Buat Playbook Reseller yang komprehensif dan proven:
+
+1. SOP REKRUT RESELLER SISTEMATIS
+   - Kriteria ideal reseller (10 poin)
+   - Proses seleksi bertahap
+   - Approval workflow
+   - Onboarding timeline 7 hari
+   - Red flags yang harus dihindari
+
+2. SKRIP WA REKRUTMEN LENGKAP
+   - Template approach pertama (3 variasi)
+   - Follow-up messages (5 tahap)
+   - Handling objections umum (10 objection)
+   - Closing script yang powerful
+   - Rejection handling
+
+3. ONBOARDING KIT KOMPLIT (10 POIN)
+   - Welcome package detail
+   - Training materials structure
+   - Marketing assets (template)
+   - Product knowledge checklist
+   - Sales scripts library
+   - Support channels
+   - Success metrics & KPI
+   - Reward system
+   - Community guidelines
+   - Success stories
+
+4. MINI-KONTRAK PROFESIONAL
+   - Terms and conditions jelas
+   - Commission structure detail
+   - Rights and obligations
+   - Termination clauses
+   - Dispute resolution
+   - Non-compete (optional)
+
+5. BROADCAST WA UNTUK RESELLER (10 TEMPLATE)
+   - Daily motivation
+   - Product updates
+   - Sales tips
+   - Success stories
+   - Promo announcements
+   - Training reminders
+   - Performance feedback
+   - Best practices
+   - Q&A sessions
+   - Celebration wins
+
+Format yang actionable dan mudah diimplementasikan!`,
+
+            funnel_builder: (input) => `Gunakan input berikut: ${input}
+
+Buat Sales Funnel lengkap dan high-converting:
+
+1. STRUKTUR FUNNEL 5 TAHAP
+   - Awareness Stage (Top Funnel)
+   - Interest Stage
+   - Consideration Stage  
+   - Decision Stage
+   - Action Stage (Bottom Funnel)
+
+2. DETAIL SETIAP TAHAP
+   Untuk masing-masing tahap, sertakan:
+   - Objective utama tahap ini
+   - Content strategy yang optimal
+   - Traffic source recommendations
+   - Conversion metrics yang ditrack
+   - Tools/platform yang dibutuhkan
+   - Psychology triggers
+   - Example content ideas (5 ide)
+   - Retargeting strategy
+
+3. CALL TO ACTION HIERARCHY
+   - Primary CTA untuk setiap tahap
+   - Secondary CTA sebagai backup
+   - Micro-CTA untuk engagement
+   - CTA copy yang super persuasif
+   - Button design recommendations
+
+4. JSON FUNNEL STRUCTURE
+   Buat struktur JSON lengkap:
+   - Funnel stages detail
+   - Content pieces mapping
+   - CTA buttons
+   - Tracking parameters
+   - Automation triggers
+   - Split test variations
+
+5. OPTIMIZATION TIPS
+   - A/B testing recommendations
+   - Bottleneck identification
+   - Scaling strategy
+   - Budget allocation
+
+Berikan visualisasi flow dan tools recommendations!`,
+
+            wa_engine: (input) => `Gunakan input berikut: ${input}
+
+Buat WhatsApp Sales Engine yang Natural & High-Converting:
+
+1. CHAT PEMBUKA (5 VARIASI)
+   - Cold opening (untuk leads baru)
+   - Warm opening (untuk yang sudah follow)
+   - Referral opening
+   - Event-based opening
+   - Personalized opening
+   (Semua harus natural, tidak terkesan jualan)
+
+2. PERTANYAAN PENGGALI LENGKAP (10 PERTANYAAN)
+   Qualifying questions untuk:
+   - Identify pain points
+   - Budget qualification
+   - Timeline/urgency
+   - Decision maker
+   - Previous experience
+   - Goals & objectives
+   - Objections potential
+   - Buying readiness score
+   (Open-ended & conversation-flowing)
+
+3. PENJELASAN PRODUK STORYTELLING
+   - Feature to benefit translation
+   - Social proof insertion points
+   - Visual aids recommendations
+   - Voice note script (optional)
+   - Video pitch script
+   - Handling 15 common questions
+   - Objection prevention
+
+4. CLOSING TECHNIQUES (7 TEKNIK)
+   - Trial close
+   - Assumptive close
+   - Alternative close
+   - Urgency close
+   - Summary close
+   - Testimonial close
+   - Guarantee close
+   (Include exact scripts untuk tiap teknik)
+
+5. JSON CONVERSATION FLOW
+   Decision tree lengkap:
+   - User input triggers
+   - Response templates
+   - Conditional branching
+   - Escalation paths
+   - Follow-up automation
+   - Recovery messages
+
+6. FOLLOW-UP STRATEGY
+   - Day 1-7 follow-up sequence
+   - Resurrection messages
+   - Special offer timing
+
+Pastikan semua flow terasa NATURAL dan authentic!`,
+
+            ad_matrix: (input) => `Gunakan input berikut: ${input}
+
+Buat Ad Creative Matrix untuk High-Performance Ads:
+
+1. 10 HEADLINE IKLAN KILLER
+   Variasi berdasarkan proven angles:
+   - 3 Benefit-driven headlines
+   - 3 Curiosity-driven headlines
+   - 2 Fear/Pain-driven headlines
+   - 2 Social proof-driven headlines
+   (Masing-masing 8-12 kata, tested & proven patterns)
+
+2. 10 HOOK VIDEO POWERFUL
+   First 3-5 detik yang grab attention:
+   - 3 Question hooks (bikin penasaran)
+   - 3 Statement hooks (shocking/bold)
+   - 2 Visual pattern interrupt
+   - 2 Testimonial hooks
+   (Include visual directions & script)
+
+3. 5 CAPTION PANJANG VARIATIONS
+   - Story-based caption (emotional)
+   - Feature-benefit caption (logical)
+   - Testimonial-driven caption (social proof)
+   - Problem-solution caption (pain-focused)
+   - Transformation caption (before-after)
+   (Masing-masing 150-200 kata)
+
+4. AD CREATIVE COMBINATIONS
+   - Image ad variations (10 concepts)
+   - Video ad storyboards (5 concepts)
+   - Carousel ad structures (3 concepts)
+
+5. SPLIT-TEST MATRIX
+   Buat comprehensive testing plan:
+   - Headline A1-A5 vs Hook B1-B5
+   - Audience variations
+   - Placement strategy
+   - Budget allocation per variation
+   - Success metrics definition
+   - Scaling decision tree
+
+6. OPTIMIZATION PLAYBOOK
+   - When to kill ads
+   - When to scale ads
+   - Creative refresh timeline
+   - Retargeting ad variations
+
+Sertakan pro tips & best practices dari expert advertisers!`,
+
+            secrets_vault: (input) => `Gunakan input berikut: ${input}
+
+BUKA VAULT RAHASIA - Growth Hacks dari Expert Marketer:
+
+1. 10 GROWTH HACKS RAHASIA
+   Hack #1-10, detail lengkap:
+   - Nama teknik unik
+   - Psychology principle di baliknya
+   - Step-by-step implementation
+   - Expected results & timeline
+   - Success case studies
+   - Common mistakes to avoid
+   - Difficulty level
+   - Resource requirements
+
+2. 5 SCARCITY TECHNIQUES YANG PROVEN
+   Teknik kelangkaan yang powerful:
+   - Limited time offers (framework)
+   - Limited quantity strategy
+   - Limited access tactics
+   - Seasonal/event-based urgency
+   - Exclusive membership model
+   (Include psychology explanation & real examples)
+
+3. BUNDLING STRATEGY LENGKAP
+   - Product bundling formulas
+   - Pricing psychology tactics
+   - Upsell sequences (3 levels)
+   - Cross-sell opportunities
+   - Package naming psychology
+   - Value stacking techniques
+   - Decoy pricing strategy
+
+4. 20 MICRO-TIPS PENJUALAN KILLER
+   Quick wins untuk:
+   - Closing techniques
+   - Objection handling one-liners
+   - Rapport building tricks
+   - Follow-up strategies
+   - Negotiation hacks
+   - Body language tips (untuk video sales)
+   - Voice tonality guides
+   - Timing optimization
+
+5. UNCONVENTIONAL TACTICS (5 RAHASIA)
+   - Contrarian strategies yang work
+   - Dark psychology (ethical usage)
+   - Reverse psychology tactics
+   - Pattern interrupts
+   - Neuro-linguistic programming basics
+
+6. IMPLEMENTATION ROADMAP
+   - Week 1-4 action plan
+   - Priority matrix
+   - Quick wins vs long-term plays
+
+Fokus pada taktik UNCONVENTIONAL tapi PROVEN dengan results!`,
+
+            kpi_spec: (input) => `Gunakan input berikut: ${input}
+
+Buat Sistem KPI Tracking Professional & Actionable:
+
+1. KPI UTAMA LENGKAP (20 METRICS)
+   
+   Revenue Metrics:
+   - GMV (Gross Merchandise Value)
+   - Net Revenue
+   - AOV (Average Order Value)
+   - LTV (Lifetime Value)
+   - MRR/ARR (untuk subscription)
+   
+   Marketing Metrics:
+   - CAC (Customer Acquisition Cost)
+   - ROAS (Return on A
